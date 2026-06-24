@@ -58,10 +58,20 @@
   .stage { display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-start; }
   .surface-label { font-size: 12px; font-weight: 600; color: var(--text-600); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px; }
 
-  /* cohort visibility */
+  /* view + cohort visibility */
+  .screen-pharmacy, .screen-address { display: none; }
+  body[data-view="new"] .screen-pharmacy,
+  body[data-view="existing"] .screen-pharmacy { display: block; }
+  body[data-view="address"] .screen-address { display: block; }
+
   .only-new, .only-existing { display: none; }
-  body[data-cohort="new"] .only-new { display: block; }
-  body[data-cohort="existing"] .only-existing { display: block; }
+  body[data-view="new"] .only-new { display: block; }
+  body[data-view="existing"] .only-existing { display: block; }
+
+  .footer-pharmacy, .footer-address { display: none; }
+  body[data-view="new"] .footer-pharmacy,
+  body[data-view="existing"] .footer-pharmacy { display: block; }
+  body[data-view="address"] .footer-address { display: block; }
 
   /* ============ MOBILE (mochi-app) ============ */
   .phone {
@@ -120,6 +130,11 @@
     background: var(--navy); color: var(--text-inverse); border: 1px solid var(--border-subtler);
     font: inherit; font-size: 16px; font-weight: 500; box-shadow: var(--shadow-card); cursor: pointer;
   }
+  .btn-secondary {
+    width: 100%; height: 52px; border-radius: var(--radius-full);
+    background: var(--white); color: var(--navy); border: 1px solid var(--border-subtler);
+    font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 12px;
+  }
 
   /* ============ WEB (mochi-turbo apps/patient) ============ */
   .web {
@@ -157,14 +172,15 @@
   .w-btn.primary { background: var(--navy); border: 1px solid var(--navy); color: #fff; }
 </style>
 </head>
-<body data-cohort="new">
+<body data-view="new">
 
   <div class="controls">
     <div class="seg" id="cohort">
-      <button data-c="new" class="active">New patient (no pharmacy on file)</button>
-      <button data-c="existing">Existing patient (pharmacy on file)</button>
+      <button data-v="new" class="active">New patient (no pharmacy on file)</button>
+      <button data-v="existing">Existing patient (pharmacy on file)</button>
+      <button data-v="address">Shipping address (next step)</button>
     </div>
-    <span class="note">Toggle the cohort to see both states.</span>
+    <span class="note">Toggle to see each state. "Shipping address" is the screen shown after Confirm for a mail-order default.</span>
   </div>
 
   <div class="stage">
@@ -180,6 +196,7 @@
           <div></div>
         </div>
         <div class="m-body">
+          <div class="screen-pharmacy">
           <div class="m-h1">Confirm your pharmacy</div>
           <div class="m-h1-sub">For your Zepbound order</div>
 
@@ -225,9 +242,28 @@
             </div>
             <a class="link-action">Add your own local pharmacy</a>
           </div>
+          </div>
+          <div class="screen-address">
+            <div class="m-h1">Confirm your shipping address</div>
+            <div class="m-h1-sub">Where should we send your Zepbound?</div>
+            <div class="m-card selected">
+              <div class="row">
+                <div class="info">
+                  <div class="m-line">1847 N Larrabee St, Apt 5</div>
+                  <div class="m-line muted">Chicago, IL 60614</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="m-footer">
-          <button class="btn-primary">Confirm</button>
+          <div class="footer-pharmacy">
+            <button class="btn-primary">Confirm</button>
+          </div>
+          <div class="footer-address">
+            <button class="btn-primary">Continue</button>
+            <button class="btn-secondary">Change address</button>
+          </div>
         </div>
       </div>
     </div>
@@ -241,6 +277,7 @@
           <div class="crumb">Request new GLP-1</div>
         </div>
         <div class="w-body">
+          <div class="screen-pharmacy">
           <div class="w-h1">Confirm your pharmacy</div>
           <div class="w-h1-sub">For your Zepbound order</div>
 
@@ -288,6 +325,24 @@
               <span class="plus">+</span>
             </div>
           </div>
+          </div>
+          <div class="screen-address">
+            <div class="w-h1">Confirm your shipping address</div>
+            <div class="w-h1-sub">Where should we send your Zepbound?</div>
+            <div class="w-card selected">
+              <div class="row">
+                <div class="info">
+                  <div class="w-title">1847 N Larrabee St, Apt 5</div>
+                  <div class="w-sub">Chicago, IL 60614</div>
+                </div>
+                <div class="w-radio on"></div>
+              </div>
+            </div>
+            <div class="w-addcard">
+              <span class="label">Add shipping address</span>
+              <span class="plus">+</span>
+            </div>
+          </div>
 
           <div class="w-footer">
             <button class="w-btn tertiary">Back</button>
@@ -303,7 +358,7 @@
   var seg = document.getElementById('cohort');
   seg.addEventListener('click', function (e) {
     var b = e.target.closest('button'); if (!b) return;
-    document.body.setAttribute('data-cohort', b.dataset.c);
+    document.body.setAttribute('data-view', b.dataset.v);
     seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x === b); });
   });
 </script>
