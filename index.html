@@ -25,9 +25,7 @@
   .seg { display: inline-flex; background: #fff; border: 1px solid var(--border-subtler); border-radius: var(--radius-full); padding: 4px; gap: 4px; flex-wrap: wrap; max-width: 920px; }
   .seg button { font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text-600); padding: 7px 14px; border-radius: var(--radius-full); }
   .seg button.active { background: var(--navy); color: #fff; }
-  .seg button.new-step { font-weight: 700; color: var(--navy); }
-  .seg button.new-step::before { content: "✦ "; }
-  .seg button.new-step.active { color: #fff; }
+  .new-badge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--navy); background: var(--selected-bg); border: 1px solid var(--navy); border-radius: var(--radius-full); padding: 2px 10px; margin-bottom: 8px; }
   .note { font-size: 12px; color: var(--text-subtler); max-width: 640px; margin-top: 10px; }
   .note b { color: var(--text-600); }
 
@@ -144,12 +142,12 @@
     <div class="seg" id="seg">
       <button data-v="medselect">1 · Select med</button>
       <button data-v="health">2 · Health check</button>
-      <button data-v="new" class="new-step active">Pharmacy (new)</button>
-      <button data-v="existing" class="new-step">Pharmacy (existing)</button>
-      <button data-v="addpharm" class="new-step">Add pharmacy</button>
+      <button data-v="new" class="active">Pharmacy (new)</button>
+      <button data-v="existing">Pharmacy (existing)</button>
+      <button data-v="addpharm">Add pharmacy</button>
       <button data-v="address">Shipping address</button>
     </div>
-    <div class="note"><b>✦ marks the new / changed screens.</b> Click through the flow (Continue → Confirm → "Add your own local pharmacy"), or jump to any screen with the chips above.</div>
+    <div class="note">Screens marked <b>✦ New</b> are the new or changed ones. Click through the flow (Continue → Confirm → "Add your own local pharmacy"), or jump to any screen with the chips above.</div>
   </div>
 
   <div class="stage">
@@ -189,6 +187,7 @@
 
           <!-- ✦ Pharmacy -->
           <div class="s-pharmacy">
+            <div class="new-badge">✦ New screen</div>
             <div class="m-h1">Confirm your pharmacy</div>
             <div class="m-h1-sub">For your Zepbound order</div>
             <div class="only-new">
@@ -234,6 +233,7 @@
 
           <!-- ✦ Add pharmacy -->
           <div class="s-addpharm">
+            <div class="new-badge">✦ New screen</div>
             <div class="m-h1">Add pharmacy</div>
             <div class="req-note"><span class="req">*</span> indicates a required field</div>
             <label class="m-field-label">Pharmacy name <span class="req">*</span></label>
@@ -317,6 +317,7 @@
 
           <!-- ✦ Pharmacy -->
           <div class="s-pharmacy">
+            <div class="new-badge">✦ New screen</div>
             <div class="w-h1">Confirm your pharmacy</div>
             <div class="w-h1-sub">For your Zepbound order</div>
             <div class="only-new">
@@ -350,6 +351,7 @@
 
           <!-- ✦ Add pharmacy -->
           <div class="s-addpharm">
+            <div class="new-badge">✦ New screen</div>
             <div class="w-h1">Add pharmacy</div>
             <div class="w-toggle-row"><span>Preferred pharmacy</span><span class="w-toggle"></span></div>
             <label class="w-field-label">Pharmacy name <span class="req">*</span></label>
