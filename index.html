@@ -15,87 +15,63 @@
     --bg-subtle: #f3f6f9;     /* screen background */
     --white: #ffffff;
     --text-default: #000045;
-    --text-700: #464853;      /* gray-700 */
-    --text-600: #606069;      /* subtle */
+    --text-700: #464853;
+    --text-600: #606069;
     --text-subtler: #7e7f87;
-    --border-subtler: #3b3b8d26; /* 15% */
-    --border-subtle: #00004533;  /* 20% */
+    --border-subtler: #3b3b8d26;
+    --border-subtle: #00004533;
     --text-inverse: #fcfcfc;
-    --selected-bg: #ebebf4;   /* brand-secondary-subtle, tag bg */
+    --selected-bg: #ebebf4;
     --shadow-card: 0 4px 12px rgba(0,0,0,0.08);
-    --radius-xl: 12px;        /* mobile HomeCard */
-    --radius-16: 16px;        /* web Card */
+    --radius-xl: 12px;
+    --radius-16: 16px;
     --radius-full: 9999px;
     font-family: "Instrument Sans", system-ui, sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #e7ebef;
-    color: var(--text-default);
-    padding: 28px 20px 60px;
-    -webkit-font-smoothing: antialiased;
-  }
+  body { background: #e7ebef; color: var(--text-default); padding: 28px 20px 60px; -webkit-font-smoothing: antialiased; }
 
   /* ===== Page chrome (not part of the mock) ===== */
-  .page-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
-  .page-sub { font-size: 13px; color: var(--text-600); margin-bottom: 20px; max-width: 720px; }
-  .controls {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 28px; flex-wrap: wrap;
-  }
-  .seg {
-    display: inline-flex; background: #fff; border: 1px solid var(--border-subtler);
-    border-radius: var(--radius-full); padding: 4px; gap: 4px;
-  }
-  .seg button {
-    font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
-    border: none; background: transparent; color: var(--text-600);
-    padding: 7px 16px; border-radius: var(--radius-full);
-  }
+  .controls { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+  .seg { display: inline-flex; background: #fff; border: 1px solid var(--border-subtler); border-radius: var(--radius-full); padding: 4px; gap: 4px; flex-wrap: wrap; }
+  .seg button { font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: transparent; color: var(--text-600); padding: 7px 14px; border-radius: var(--radius-full); }
   .seg button.active { background: var(--navy); color: #fff; }
-  .note { font-size: 12px; color: var(--text-subtler); }
+  .note { font-size: 12px; color: var(--text-subtler); max-width: 420px; }
 
   .stage { display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-start; }
   .surface-label { font-size: 12px; font-weight: 600; color: var(--text-600); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 12px; }
 
-  /* view + cohort visibility */
-  .screen-pharmacy, .screen-address { display: none; }
+  /* ===== view + cohort visibility ===== */
+  .screen-before, .screen-pharmacy, .screen-address, .screen-addpharm { display: none; }
+  body[data-view="before"] .screen-before { display: block; }
   body[data-view="new"] .screen-pharmacy,
   body[data-view="existing"] .screen-pharmacy { display: block; }
   body[data-view="address"] .screen-address { display: block; }
+  body[data-view="addpharm"] .screen-addpharm { display: block; }
 
   .only-new, .only-existing { display: none; }
   body[data-view="new"] .only-new { display: block; }
   body[data-view="existing"] .only-existing { display: block; }
 
-  .footer-pharmacy, .footer-address { display: none; }
+  .footer-before, .footer-pharmacy, .footer-address, .footer-addpharm { display: none; }
+  body[data-view="before"] .footer-before { display: block; }
   body[data-view="new"] .footer-pharmacy,
   body[data-view="existing"] .footer-pharmacy { display: block; }
   body[data-view="address"] .footer-address { display: block; }
+  body[data-view="addpharm"] .footer-addpharm { display: block; }
 
   /* ============ MOBILE (mochi-app) ============ */
-  .phone {
-    width: 380px; background: var(--bg-subtle);
-    border-radius: 40px; border: 10px solid #11122a;
-    overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.25);
-    display: flex; flex-direction: column; height: 760px;
-  }
+  .phone { width: 380px; background: var(--bg-subtle); border-radius: 40px; border: 10px solid #11122a; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.25); display: flex; flex-direction: column; height: 760px; }
   .m-statusbar { height: 44px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color: var(--navy); }
-  .m-navbar {
-    display: grid; grid-template-columns: 44px 1fr 44px; align-items: center;
-    padding: 4px 12px 12px; background: var(--bg-subtle);
-  }
-  .m-navbar .back { font-size: 22px; color: var(--navy); }
+  .m-navbar { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding: 4px 12px 12px; background: var(--bg-subtle); }
+  .m-navbar .back { font-size: 22px; color: var(--navy); cursor: pointer; }
   .m-navbar .title { text-align: center; font-size: 16px; font-weight: 500; color: var(--navy); }
   .m-body { flex: 1; overflow-y: auto; padding: 0 16px; }
   .m-h1 { font-size: 20px; font-weight: 600; color: var(--navy); margin: 8px 0 4px; }
   .m-h1-sub { font-size: 13px; color: var(--text-600); margin-bottom: 16px; }
 
-  .m-card {
-    background: var(--white); border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px;
-    border: 2px solid transparent; position: relative;
-  }
+  .m-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 12px; border: 2px solid transparent; }
   .m-card.selected { border-color: var(--navy); }
   .m-card .row { display: flex; align-items: flex-start; gap: 12px; }
   .m-card .info { flex: 1; min-width: 0; }
@@ -104,12 +80,7 @@
   .m-line.muted { color: var(--text-600); font-weight: 400; margin-top: 2px; }
   .m-line.phone-num { color: var(--text-600); font-weight: 400; margin-top: 8px; }
 
-  .tag {
-    display: inline-flex; align-items: center; font-size: 11px; font-weight: 500;
-    color: var(--navy); background: var(--selected-bg);
-    border: 1px solid var(--navy); border-radius: var(--radius-full);
-    padding: 2px 10px; margin-bottom: 8px;
-  }
+  .tag { display: inline-flex; align-items: center; font-size: 11px; font-weight: 500; color: var(--navy); background: var(--selected-bg); border: 1px solid var(--navy); border-radius: var(--radius-full); padding: 2px 10px; margin-bottom: 8px; }
   .ship-note { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--navy); margin: 4px 0; }
   .ship-note svg { width: 16px; height: 16px; flex: none; }
   .ship-addr { font-size: 12px; color: var(--text-600); font-weight: 400; }
@@ -118,41 +89,36 @@
   .radio.on { border-color: var(--navy); }
   .radio.on::after { content:""; width: 12px; height: 12px; border-radius: 50%; background: var(--navy); }
 
-  .link-action {
-    display: inline-block; font-size: 15px; font-weight: 500; color: var(--purple);
-    text-decoration: none; padding: 4px 0; cursor: pointer;
-  }
+  .link-action { display: inline-block; font-size: 15px; font-weight: 500; color: var(--purple); text-decoration: none; padding: 4px 0; cursor: pointer; }
   .link-action::before { content: "+ "; font-weight: 600; }
 
+  .m-field-label { display: block; font-size: 14px; font-weight: 500; color: var(--navy); margin: 16px 0 6px; }
+  .m-field-label .req { color: #ea4135; }
+  .m-input { height: 56px; background: var(--white); border: 1px solid var(--border-subtler); border-radius: var(--radius-xl); padding: 0 16px; display: flex; align-items: center; justify-content: space-between; font-size: 17px; color: var(--navy); }
+  .m-input .ph { color: var(--text-600); }
+  .m-input .unit { color: var(--text-600); font-size: 15px; }
+  .m-input .chev { color: var(--text-600); }
+  .req-note { font-size: 12px; color: var(--text-600); margin: 8px 0 4px; }
+  .req-note .req { color: #ea4135; }
+
+  .m-opt { display: flex; align-items: center; gap: 12px; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-card); padding: 16px; margin-bottom: 10px; border: 2px solid transparent; font-size: 15px; color: var(--navy); font-weight: 500; }
+  .m-opt.sel { border-color: var(--navy); }
+
   .m-footer { padding: 16px 16px 28px; background: var(--bg-subtle); }
-  .btn-primary {
-    width: 100%; height: 52px; border-radius: var(--radius-full);
-    background: var(--navy); color: var(--text-inverse); border: 1px solid var(--border-subtler);
-    font: inherit; font-size: 16px; font-weight: 500; box-shadow: var(--shadow-card); cursor: pointer;
-  }
-  .btn-secondary {
-    width: 100%; height: 52px; border-radius: var(--radius-full);
-    background: var(--white); color: var(--navy); border: 1px solid var(--border-subtler);
-    font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 12px;
-  }
+  .btn-primary { width: 100%; height: 52px; border-radius: var(--radius-full); background: var(--navy); color: var(--text-inverse); border: 1px solid var(--border-subtler); font: inherit; font-size: 16px; font-weight: 500; box-shadow: var(--shadow-card); cursor: pointer; }
+  .btn-secondary { width: 100%; height: 52px; border-radius: var(--radius-full); background: var(--white); color: var(--navy); border: 1px solid var(--border-subtler); font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 12px; }
 
   /* ============ WEB (mochi-turbo apps/patient) ============ */
-  .web {
-    width: 460px; background: var(--white); border: 1px solid var(--border-subtler);
-    border-radius: 18px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.12);
-  }
+  .web { width: 460px; background: var(--white); border: 1px solid var(--border-subtler); border-radius: 18px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.12); }
   .w-topbar { height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid var(--border-subtler); }
-  .w-topbar .back { font-size: 20px; color: var(--navy); }
+  .w-topbar .back { font-size: 20px; color: var(--navy); cursor: pointer; }
   .w-topbar .crumb { font-size: 14px; font-weight: 500; color: var(--text-600); }
   .w-body { padding: 28px 24px; }
   .w-h1 { font-size: 24px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
   .w-h1-sub { font-size: 14px; color: var(--text-600); margin-bottom: 22px; }
 
-  .w-card {
-    border: 1px solid var(--border-subtler); border-radius: var(--radius-16);
-    padding: 16px; margin-bottom: 12px; background: var(--white);
-  }
-  .w-card.selected { border-color: var(--navy); border-width: 1px; box-shadow: 0 0 0 1px var(--navy); }
+  .w-card { border: 1px solid var(--border-subtler); border-radius: var(--radius-16); padding: 16px; margin-bottom: 12px; background: var(--white); }
+  .w-card.selected { border-color: var(--navy); box-shadow: 0 0 0 1px var(--navy); }
   .w-card .row { display: flex; align-items: flex-start; gap: 14px; }
   .w-card .info { flex: 1; min-width: 0; }
   .w-title { font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 4px; display:flex; align-items:center; gap:8px; }
@@ -166,6 +132,15 @@
   .w-addcard .label { font-size: 14px; font-weight: 500; color: var(--navy); }
   .w-addcard .plus { font-size: 18px; color: var(--navy); }
 
+  .w-field-label { display: block; font-size: 14px; font-weight: 500; color: var(--navy); margin: 14px 0 6px; }
+  .w-field-label .req { color: #ea4135; }
+  .w-input { height: 44px; border: 1px solid var(--border-subtler); border-radius: var(--radius-full); padding: 0 16px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: var(--navy); }
+  .w-input .ph { color: var(--text-600); }
+  .w-opt { display: flex; align-items: center; gap: 10px; padding: 12px 0; font-size: 14px; color: var(--navy); }
+  .w-toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0 6px; font-size: 14px; font-weight: 500; color: var(--navy); }
+  .w-toggle { width: 38px; height: 22px; border-radius: var(--radius-full); background: var(--border-subtle); position: relative; }
+  .w-toggle::after { content:""; position:absolute; top:2px; left:2px; width:18px; height:18px; border-radius:50%; background:#fff; }
+
   .w-footer { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
   .w-btn { min-width: 128px; height: 44px; border-radius: var(--radius-full); font: inherit; font-size: 14px; font-weight: 500; cursor: pointer; padding: 0 16px; }
   .w-btn.tertiary { background: transparent; border: none; color: var(--navy); }
@@ -175,12 +150,14 @@
 <body data-view="new">
 
   <div class="controls">
-    <div class="seg" id="cohort">
-      <button data-v="new" class="active">New patient (no pharmacy on file)</button>
-      <button data-v="existing">Existing patient (pharmacy on file)</button>
-      <button data-v="address">Shipping address (next step)</button>
+    <div class="seg" id="seg">
+      <button data-v="before">1 · Health check</button>
+      <button data-v="new" class="active">2 · Pharmacy (new)</button>
+      <button data-v="existing">2 · Pharmacy (existing)</button>
+      <button data-v="addpharm">Add pharmacy</button>
+      <button data-v="address">3 · Shipping address</button>
     </div>
-    <span class="note">Toggle to see each state. "Shipping address" is the screen shown after Confirm for a mail-order default.</span>
+    <span class="note">Click through the flow, or jump to any screen. "Add your own local pharmacy" opens the Add pharmacy form; "Confirm" advances to the shipping address screen.</span>
   </div>
 
   <div class="stage">
@@ -191,58 +168,90 @@
       <div class="phone">
         <div class="m-statusbar">9:41</div>
         <div class="m-navbar">
-          <div class="back">‹</div>
+          <div class="back" data-goto="before">‹</div>
           <div class="title">Request new GLP-1</div>
           <div></div>
         </div>
         <div class="m-body">
+
+          <!-- BEFORE: health check / weight trend -->
+          <div class="screen-before">
+            <div class="m-h1">Weight trend</div>
+            <div class="m-h1-sub">Health check</div>
+            <label class="m-field-label">How much did you weigh 4 weeks ago?</label>
+            <div class="m-input"><span>210</span><span class="unit">lbs</span></div>
+            <label class="m-field-label">How much do you weigh now?</label>
+            <div class="m-input"><span>198</span><span class="unit">lbs</span></div>
+          </div>
+
+          <!-- PHARMACY -->
           <div class="screen-pharmacy">
-          <div class="m-h1">Confirm your pharmacy</div>
-          <div class="m-h1-sub">For your Zepbound order</div>
+            <div class="m-h1">Confirm your pharmacy</div>
+            <div class="m-h1-sub">For your Zepbound order</div>
 
-          <!-- NEW patient: default pre-selected -->
-          <div class="only-new">
-            <div class="m-card selected">
-              <div class="row">
-                <div class="info">
-                  <span class="tag">Recommended</span>
-                  <div class="m-pharm-name">LillyDirect Pharmacy</div>
-                  <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
-                  <div class="ship-addr">Self Pay Pharmacy Solutions &middot; Columbus, OH</div>
+            <div class="only-new">
+              <div class="m-card selected">
+                <div class="row">
+                  <div class="info">
+                    <span class="tag">Recommended</span>
+                    <div class="m-pharm-name">LillyDirect Pharmacy</div>
+                    <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
+                    <div class="ship-addr">LillyDirect &middot; Columbus, OH</div>
+                  </div>
+                  <div class="radio on"></div>
                 </div>
-                <div class="radio on"></div>
               </div>
+              <a class="link-action" data-goto="addpharm">Add your own local pharmacy</a>
             </div>
-            <a class="link-action">Add your own local pharmacy</a>
+
+            <div class="only-existing">
+              <div class="m-card selected">
+                <div class="row">
+                  <div class="info">
+                    <span class="tag">Recommended</span>
+                    <div class="m-pharm-name">LillyDirect Pharmacy</div>
+                    <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
+                    <div class="ship-addr">LillyDirect &middot; Columbus, OH</div>
+                  </div>
+                  <div class="radio on"></div>
+                </div>
+              </div>
+              <div class="m-card">
+                <div class="row">
+                  <div class="info">
+                    <div class="m-pharm-name">CVS Pharmacy #4021</div>
+                    <div class="m-line">2100 Market Street</div>
+                    <div class="m-line muted">Philadelphia, PA 19103</div>
+                    <div class="m-line phone-num">(215) 555-0142</div>
+                  </div>
+                  <div class="radio"></div>
+                </div>
+              </div>
+              <a class="link-action" data-goto="addpharm">Add your own local pharmacy</a>
+            </div>
           </div>
 
-          <!-- EXISTING patient: brand default selected, their local pharmacy offered below -->
-          <div class="only-existing">
-            <div class="m-card selected">
-              <div class="row">
-                <div class="info">
-                  <span class="tag">Recommended</span>
-                  <div class="m-pharm-name">LillyDirect Pharmacy</div>
-                  <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
-                  <div class="ship-addr">Self Pay Pharmacy Solutions &middot; Columbus, OH</div>
-                </div>
-                <div class="radio on"></div>
-              </div>
-            </div>
-            <div class="m-card">
-              <div class="row">
-                <div class="info">
-                  <div class="m-pharm-name">CVS Pharmacy #4021</div>
-                  <div class="m-line">2100 Market Street</div>
-                  <div class="m-line muted">Philadelphia, PA 19103</div>
-                  <div class="m-line phone-num">(215) 555-0142</div>
-                </div>
-                <div class="radio"></div>
-              </div>
-            </div>
-            <a class="link-action">Add your own local pharmacy</a>
+          <!-- ADD PHARMACY form -->
+          <div class="screen-addpharm">
+            <div class="m-h1">Add pharmacy</div>
+            <div class="req-note"><span class="req">*</span> indicates a required field</div>
+            <label class="m-field-label">Pharmacy name <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">CVS, Walgreens, etc.</span></div>
+            <label class="m-field-label">Pharmacy phone <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">(555) 123-4567</span></div>
+            <label class="m-field-label">Address line 1 <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">Street address</span></div>
+            <label class="m-field-label">Address line 2</label>
+            <div class="m-input"><span class="ph">Suite, floor (optional)</span></div>
+            <label class="m-field-label">City <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">City</span></div>
+            <label class="m-field-label">State <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">Select state</span><span class="chev">⌄</span></div>
+            <label class="m-field-label">ZIP code <span class="req">*</span></label>
+            <div class="m-input"><span class="ph">ZIP</span></div>
           </div>
-          </div>
+
+          <!-- AFTER: shipping address -->
           <div class="screen-address">
             <div class="m-h1">Confirm your shipping address</div>
             <div class="m-h1-sub">Where should we send your Zepbound?</div>
@@ -255,14 +264,18 @@
               </div>
             </div>
           </div>
+
         </div>
         <div class="m-footer">
-          <div class="footer-pharmacy">
-            <button class="btn-primary">Confirm</button>
-          </div>
+          <div class="footer-before"><button class="btn-primary" data-goto="new">Continue</button></div>
+          <div class="footer-pharmacy"><button class="btn-primary" data-goto="address">Confirm</button></div>
           <div class="footer-address">
             <button class="btn-primary">Continue</button>
             <button class="btn-secondary">Change address</button>
+          </div>
+          <div class="footer-addpharm">
+            <button class="btn-primary" data-goto="new">Save</button>
+            <button class="btn-secondary" data-goto="new">Cancel</button>
           </div>
         </div>
       </div>
@@ -273,59 +286,107 @@
       <div class="surface-label">Web</div>
       <div class="web">
         <div class="w-topbar">
-          <div class="back">‹</div>
+          <div class="back" data-goto="before">‹</div>
           <div class="crumb">Request new GLP-1</div>
         </div>
         <div class="w-body">
+
+          <!-- BEFORE: health check -->
+          <div class="screen-before">
+            <div class="w-h1">Tell us how you're doing</div>
+            <div class="w-h1-sub">Your provider will review these responses.</div>
+            <div class="w-sub" style="margin-bottom:8px; color:var(--navy); font-weight:500;">Are you experiencing any side effects with your current medication?</div>
+            <div class="w-opt"><div class="w-radio on"></div><span>No side effects</span></div>
+            <div class="w-opt"><div class="w-radio"></div><span>Yes, I'm experiencing side effects</span></div>
+            <label class="w-field-label">Weight 4 weeks ago</label>
+            <div class="w-input"><span>210</span><span class="ph">lbs</span></div>
+            <label class="w-field-label">Weight now</label>
+            <div class="w-input"><span>198</span><span class="ph">lbs</span></div>
+            <div class="w-footer">
+              <button class="w-btn tertiary">Back</button>
+              <button class="w-btn primary" data-goto="new">Continue</button>
+            </div>
+          </div>
+
+          <!-- PHARMACY -->
           <div class="screen-pharmacy">
-          <div class="w-h1">Confirm your pharmacy</div>
-          <div class="w-h1-sub">For your Zepbound order</div>
+            <div class="w-h1">Confirm your pharmacy</div>
+            <div class="w-h1-sub">For your Zepbound order</div>
 
-          <!-- NEW patient -->
-          <div class="only-new">
-            <div class="w-card selected">
-              <div class="row">
-                <div class="info">
-                  <div class="w-title">LillyDirect Pharmacy <span class="tag" style="margin:0">Recommended</span></div>
-                  <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
-                  <div class="ship-addr">Self Pay Pharmacy Solutions &middot; Columbus, OH</div>
+            <div class="only-new">
+              <div class="w-card selected">
+                <div class="row">
+                  <div class="info">
+                    <div class="w-title">LillyDirect Pharmacy <span class="tag" style="margin:0">Recommended</span></div>
+                    <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
+                    <div class="ship-addr">LillyDirect &middot; Columbus, OH</div>
+                  </div>
+                  <div class="w-radio on"></div>
                 </div>
-                <div class="w-radio on"></div>
+              </div>
+              <div class="w-addcard" data-goto="addpharm">
+                <span class="label">Add your own local pharmacy</span>
+                <span class="plus">+</span>
               </div>
             </div>
-            <div class="w-addcard">
-              <span class="label">Add your own local pharmacy</span>
-              <span class="plus">+</span>
+
+            <div class="only-existing">
+              <div class="w-card selected">
+                <div class="row">
+                  <div class="info">
+                    <div class="w-title">LillyDirect Pharmacy <span class="tag" style="margin:0">Recommended</span></div>
+                    <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
+                    <div class="ship-addr">LillyDirect &middot; Columbus, OH</div>
+                  </div>
+                  <div class="w-radio on"></div>
+                </div>
+              </div>
+              <div class="w-card">
+                <div class="row">
+                  <div class="info">
+                    <div class="w-title">CVS Pharmacy #4021</div>
+                    <div class="w-sub">2100 Market Street<br/>Philadelphia, PA 19103<br/>(215) 555-0142</div>
+                  </div>
+                  <div class="w-radio"></div>
+                </div>
+              </div>
+              <div class="w-addcard" data-goto="addpharm">
+                <span class="label">Add your own local pharmacy</span>
+                <span class="plus">+</span>
+              </div>
+            </div>
+
+            <div class="w-footer">
+              <button class="w-btn tertiary">Back</button>
+              <button class="w-btn primary" data-goto="address">Confirm</button>
             </div>
           </div>
 
-          <!-- EXISTING patient: brand default selected, their local pharmacy offered below -->
-          <div class="only-existing">
-            <div class="w-card selected">
-              <div class="row">
-                <div class="info">
-                  <div class="w-title">LillyDirect Pharmacy <span class="tag" style="margin:0">Recommended</span></div>
-                  <div class="ship-note"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M5.161 2h7.678c.527 0 .981 0 1.356.03.395.033.789.104 1.167.297a3 3 0 0 1 1.311 1.311c.193.378.264.772.296 1.167.031.375.031.83.031 1.356V7h1.388c.19 0 .43-.001.665.055a2 2 0 0 1 .578.24c.206.126.375.296.509.43l.036.037 2.063 2.062.036.036c.134.134.304.303.43.51q.165.269.24.577c.056.236.056.475.055.665v2.82c0 .252 0 .498-.017.706a2 2 0 0 1-.201.77 2 2 0 0 1-.874.874 2 2 0 0 1-.77.201 7 7 0 0 1-.475.017 3.5 3.5 0 1 1-6.326 0H9.663a3.5 3.5 0 1 1-6.285-.085 2.7 2.7 0 0 1-.74-.242 3 3 0 0 1-1.311-1.311c-.193-.378-.264-.772-.296-1.167C1 13.82 1 13.365 1 12.838V6.162c0-.527 0-.981.03-1.356.033-.395.104-.789.297-1.167a3 3 0 0 1 1.311-1.311c.378-.193.772-.264 1.167-.296C4.18 2 4.635 2 5.161 2M6.5 17a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m8.5-2V6.2c0-.577 0-.949-.024-1.232-.022-.272-.06-.373-.085-.422a1 1 0 0 0-.437-.437c-.05-.025-.15-.063-.422-.085C13.75 4 13.377 4 12.8 4H5.2c-.577 0-.949 0-1.232.024-.272.022-.373.06-.422.085a1 1 0 0 0-.437.437c-.025.05-.063.15-.085.422C3 5.25 3 5.623 3 6.2v6.6c0 .577 0 .949.024 1.232.022.272.06.373.085.422a1 1 0 0 0 .437.437c.05.025.15.063.422.085C4.25 15 4.623 15 5.2 15zm2-6v6h3.4a8 8 0 0 0 .589-.011v-.014c.01-.116.011-.278.011-.575v-2.737c0-.131 0-.197-.002-.244v-.004l-.003-.002a6 6 0 0 0-.17-.175l-2.063-2.062a6 6 0 0 0-.177-.173h-.004A6 6 0 0 0 18.337 9zm.5 8a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg><span>Ships right to your door</span></div>
-                  <div class="ship-addr">Self Pay Pharmacy Solutions &middot; Columbus, OH</div>
-                </div>
-                <div class="w-radio on"></div>
-              </div>
-            </div>
-            <div class="w-card">
-              <div class="row">
-                <div class="info">
-                  <div class="w-title">CVS Pharmacy #4021</div>
-                  <div class="w-sub">2100 Market Street<br/>Philadelphia, PA 19103<br/>(215) 555-0142</div>
-                </div>
-                <div class="w-radio"></div>
-              </div>
-            </div>
-            <div class="w-addcard">
-              <span class="label">Add your own local pharmacy</span>
-              <span class="plus">+</span>
+          <!-- ADD PHARMACY form -->
+          <div class="screen-addpharm">
+            <div class="w-h1">Add pharmacy</div>
+            <div class="w-toggle-row"><span>Preferred pharmacy</span><span class="w-toggle"></span></div>
+            <label class="w-field-label">Pharmacy name <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">Pharmacy name</span></div>
+            <label class="w-field-label">Address <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">Address</span></div>
+            <label class="w-field-label">Address line 2</label>
+            <div class="w-input"><span class="ph">Building, suite, etc. (optional)</span></div>
+            <label class="w-field-label">City <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">City</span></div>
+            <label class="w-field-label">State <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">State</span><span>⌄</span></div>
+            <label class="w-field-label">Zip code <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">Zip code</span></div>
+            <label class="w-field-label">Phone number <span class="req">*</span></label>
+            <div class="w-input"><span class="ph">Phone number</span></div>
+            <div class="w-footer">
+              <button class="w-btn tertiary" data-goto="new">Back</button>
+              <button class="w-btn primary" data-goto="new">Save</button>
             </div>
           </div>
-          </div>
+
+          <!-- AFTER: shipping address -->
           <div class="screen-address">
             <div class="w-h1">Confirm your shipping address</div>
             <div class="w-h1-sub">Where should we send your Zepbound?</div>
@@ -342,12 +403,12 @@
               <span class="label">Add shipping address</span>
               <span class="plus">+</span>
             </div>
+            <div class="w-footer">
+              <button class="w-btn tertiary" data-goto="new">Back</button>
+              <button class="w-btn primary">Confirm</button>
+            </div>
           </div>
 
-          <div class="w-footer">
-            <button class="w-btn tertiary">Back</button>
-            <button class="w-btn primary">Confirm</button>
-          </div>
         </div>
       </div>
     </div>
@@ -355,11 +416,19 @@
   </div>
 
 <script>
-  var seg = document.getElementById('cohort');
+  var seg = document.getElementById('seg');
+  function setView(v) {
+    document.body.setAttribute('data-view', v);
+    seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x.dataset.v === v); });
+    document.querySelectorAll('.m-body, .w-body').forEach(function (el) { el.scrollTop = 0; });
+  }
   seg.addEventListener('click', function (e) {
-    var b = e.target.closest('button'); if (!b) return;
-    document.body.setAttribute('data-view', b.dataset.v);
-    seg.querySelectorAll('button').forEach(function (x) { x.classList.toggle('active', x === b); });
+    var b = e.target.closest('button'); if (b && b.dataset.v) setView(b.dataset.v);
+  });
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest('[data-goto]'); if (!g) return;
+    e.preventDefault();
+    setView(g.dataset.goto);
   });
 </script>
 </body>
