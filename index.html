@@ -401,6 +401,22 @@
   }
   seg.addEventListener('click', function (e) { var b = e.target.closest('button'); if (b && b.dataset.v) setView(b.dataset.v); });
   document.addEventListener('click', function (e) { var g = e.target.closest('[data-goto]'); if (!g) return; e.preventDefault(); setView(g.dataset.goto); });
+
+  // Make pharmacy cards selectable (toggle the radio + navy border within each group)
+  document.querySelectorAll('.s-pharmacy .only-new, .s-pharmacy .only-existing').forEach(function (group) {
+    var cards = group.querySelectorAll('.m-card, .w-card');
+    cards.forEach(function (card) {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', function () {
+        cards.forEach(function (c) {
+          c.classList.remove('selected');
+          var r = c.querySelector('.radio, .w-radio'); if (r) r.classList.remove('on');
+        });
+        card.classList.add('selected');
+        var r = card.querySelector('.radio, .w-radio'); if (r) r.classList.add('on');
+      });
+    });
+  });
 </script>
 </body>
 </html>
