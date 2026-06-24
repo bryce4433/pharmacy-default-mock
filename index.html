@@ -100,6 +100,7 @@
     border: 1px solid var(--navy); border-radius: var(--radius-full);
     padding: 2px 10px; margin-bottom: 8px;
   }
+  .tag.tag-neutral { background: var(--white); border-color: var(--border-subtle); color: var(--text-600); }
 
   .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border-subtle); flex: none; margin-top: 2px; display:flex; align-items:center; justify-content:center; }
   .radio.on { border-color: var(--navy); }
@@ -200,22 +201,34 @@
             <a class="link-action">Add your own local pharmacy</a>
           </div>
 
-          <!-- EXISTING patient: their pharmacy, with switch-to-default -->
+          <!-- EXISTING patient: brand default selected, their local pharmacy offered below -->
           <div class="only-existing">
             <div class="m-card selected">
               <div class="row">
                 <div class="info">
-                  <span class="tag">Preferred</span>
+                  <span class="tag">Recommended</span>
+                  <div class="m-pharm-name">LillyDirect Pharmacy</div>
+                  <div class="m-line">Self Pay Pharmacy Solutions</div>
+                  <div class="m-line muted">4343 Equity Drive</div>
+                  <div class="m-line muted">Columbus, OH 43228</div>
+                </div>
+                <div class="radio on"></div>
+              </div>
+            </div>
+            <div class="reassure">Patients find this is the easiest option, with fast delivery straight to your door.</div>
+            <div class="m-card">
+              <div class="row">
+                <div class="info">
+                  <span class="tag tag-neutral">Your pharmacy</span>
                   <div class="m-pharm-name">CVS Pharmacy #4021</div>
                   <div class="m-line">2100 Market Street</div>
                   <div class="m-line muted">Philadelphia, PA 19103</div>
                   <div class="m-line phone-num">(215) 555-0142</div>
                 </div>
-                <div class="radio on"></div>
+                <div class="radio"></div>
               </div>
             </div>
-            <div class="reassure">This is the pharmacy on your file. You can switch to the recommended option for faster delivery.</div>
-            <a class="link-action" style="color:var(--purple)">Switch to LillyDirect (recommended)</a>
+            <a class="link-action">Add your own local pharmacy</a>
           </div>
         </div>
         <div class="m-footer">
@@ -254,21 +267,30 @@
             </div>
           </div>
 
-          <!-- EXISTING patient -->
+          <!-- EXISTING patient: brand default selected, their local pharmacy offered below -->
           <div class="only-existing">
             <div class="w-card selected">
               <div class="row">
                 <div class="info">
-                  <div class="w-title">CVS Pharmacy #4021 <span class="tag" style="margin:0">Preferred</span></div>
-                  <div class="w-sub">2100 Market Street<br/>Philadelphia, PA 19103<br/>(215) 555-0142</div>
+                  <div class="w-title">LillyDirect Pharmacy <span class="tag" style="margin:0">Recommended</span></div>
+                  <div class="w-sub">Self Pay Pharmacy Solutions<br/>4343 Equity Drive<br/>Columbus, OH 43228</div>
                 </div>
                 <div class="w-radio on"></div>
               </div>
             </div>
-            <div class="w-reassure">This is the pharmacy on your file. You can switch to the recommended option for faster delivery.</div>
+            <div class="w-reassure">Patients find this is the easiest option, with fast delivery straight to your door.</div>
+            <div class="w-card">
+              <div class="row">
+                <div class="info">
+                  <div class="w-title">CVS Pharmacy #4021 <span class="tag tag-neutral" style="margin:0">Your pharmacy</span></div>
+                  <div class="w-sub">2100 Market Street<br/>Philadelphia, PA 19103<br/>(215) 555-0142</div>
+                </div>
+                <div class="w-radio"></div>
+              </div>
+            </div>
             <div class="w-addcard">
-              <span class="label">Switch to LillyDirect (recommended)</span>
-              <span class="plus">›</span>
+              <span class="label">Add your own local pharmacy</span>
+              <span class="plus">+</span>
             </div>
           </div>
 
